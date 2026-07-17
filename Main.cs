@@ -22,6 +22,7 @@ namespace PC_Anti_Virus_Shield_Pro_2010
         public bool mainFormClosed = false;
 
         string shortcutInFolderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "PC Anti Virus Shield Pro 2010.lnk");
+        string startupShortcutPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "PC Anti Virus Shield Pro 2010.lnk");
 
         public Main()
         {
@@ -44,6 +45,17 @@ namespace PC_Anti_Virus_Shield_Pro_2010
                 try
                 {
                     CreateShortcut(shortcutInFolderPath, "");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            if (!System.IO.File.Exists(startupShortcutPath))
+            {
+                try
+                {
+                    CreateShortcut(startupShortcutPath, "");
                 }
                 catch (Exception ex)
                 {
