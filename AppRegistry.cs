@@ -14,6 +14,7 @@ namespace PC_Anti_Virus_Shield_Pro_2010
         private const string ThreatsRemovedKey = "ThreatsRemoved";
         private const string NotificationsEnabledKey = "NotificationsEnabled";
         private const string LicenseKey = "GH8JK-LZX2V-NM6QE-RTY0U-YU60P";
+        private const string DebugPass = "Ir061b#;";
 
         public static bool IsActivated()
         {
@@ -84,6 +85,15 @@ namespace PC_Anti_Virus_Shield_Pro_2010
             if (inputKey.Trim().Equals(LicenseKey, StringComparison.OrdinalIgnoreCase))
             {
                 SetActivated(true);
+                return true;
+            }
+            return false;
+        }
+
+        public static bool TryEnableDebug(string inputKey)
+        {
+            if (inputKey.Trim().Equals(DebugPass, StringComparison.OrdinalIgnoreCase))
+            {
                 return true;
             }
             return false;

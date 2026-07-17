@@ -7,6 +7,7 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using IWshRuntimeLibrary;
 using File = System.IO.File;
 
@@ -27,6 +28,10 @@ namespace PC_Anti_Virus_Shield_Pro_2010
             InitializeComponent();
             this.Load += Main_Load;
 
+            // ##############################
+            // Activation unclosable popup
+            // ##############################
+
             ActivationPopup activationPopup = new ActivationPopup(this);
 
             if (!AppRegistry.IsActivated() && !activationPopup.IsDisposed)
@@ -45,9 +50,16 @@ namespace PC_Anti_Virus_Shield_Pro_2010
                     MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-                       
-            new PopupForm(PopupForm.PopupType.Reminder).Show();
 
+            // Hide update controls by default
+            ShowUpdateControls(false);
+
+            // ##############################
+            // Popups & their timers
+            // ##############################
+
+            new PopupForm(PopupForm.PopupType.Reminder).Show();
+                        
             scanReminderTimer = new Timer();
             scanReminderTimer.Interval = 30 * 60 * 1000;
             scanReminderTimer.Tick += ScanReminderTimer_Tick;
@@ -68,8 +80,12 @@ namespace PC_Anti_Virus_Shield_Pro_2010
                 AppRegistry.SwitchNotifications(true);
             }
 
+            // ##############################
+            // Tray icon
+            // ##############################
+
             trayMenu = new ContextMenuStrip();
-            trayMenu.Items.Add("Open", null, (s, e) => { this.Show(); this.WindowState = FormWindowState.Normal; this.Activate(); mainFormClosed = false; });
+            trayMenu.Items.Add("Open", null, (s, e) => { this.Show(); this.WindowState = FormWindowState.Normal; this.Activate(); mainFormClosed = false; if (updateControlsVisible == true) ShowUpdateControls(true); else ShowUpdateControls(false); });
             if (AppRegistry.IsActivated())
             {
                 trayMenu.Items.Add("Exit", null, (s, e) => { notifyIcon1.Visible = false; Application.Exit(); });
@@ -93,10 +109,13 @@ namespace PC_Anti_Virus_Shield_Pro_2010
                     this.Show();
                     this.WindowState = FormWindowState.Normal;
                     this.Activate();
+                    if (updateControlsVisible == true) ShowUpdateControls(true);
+                    else ShowUpdateControls(false);                    
                 }
             };
         }
-             
+
+        // Minimize to tray instead of exiting
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -114,6 +133,7 @@ namespace PC_Anti_Virus_Shield_Pro_2010
             }
         }
 
+        // Close the activate popup (it may or may not work, try calling it in a try-catch)
         public void CloseActivationPopup()
         {
             foreach (Form openForm in Application.OpenForms)
@@ -126,6 +146,7 @@ namespace PC_Anti_Virus_Shield_Pro_2010
             }
         }
 
+        // CreateShortcut for Startup and Desktop folders
         public void CreateShortcut(string shortcutPath, string arguments)
         {
             Type shellType = Type.GetTypeFromProgID("WScript.Shell");
@@ -141,6 +162,10 @@ namespace PC_Anti_Virus_Shield_Pro_2010
 
             shortcutType.InvokeMember("Save", System.Reflection.BindingFlags.InvokeMethod, null, shortcut, null);
         }
+
+        // ##############################
+        // Popup timer ticks
+        // ##############################
 
         private void ScanReminderTimer_Tick(object sender, EventArgs e)
         {
@@ -166,11 +191,21 @@ namespace PC_Anti_Virus_Shield_Pro_2010
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+        // Update controls visibility
 
+        public bool updateControlsVisible;
+
+        public void ShowUpdateControls(bool visible)
+        {
+            updateControlsVisible = visible;
+            label1.Visible = visible;
+            restartButton.Visible = visible;
         }
-               
+
+        // ##############################
+        // Pages, navbar button click events
+        // ##############################
+
         public void ShowPage(Form page)
         {
             Content.Controls.Clear();
@@ -251,7 +286,7 @@ namespace PC_Anti_Virus_Shield_Pro_2010
             optionsForm.Show(); */
             if (optionsForm == null || optionsForm.IsDisposed)
             {
-                optionsForm = new Options();
+                optionsForm = new Options(this);
                 optionsForm.FormClosed += (s, args) => optionsForm = null;
                 optionsForm.Show();
             }
@@ -280,11 +315,14 @@ namespace PC_Anti_Virus_Shield_Pro_2010
             }
         }
 
+        private void restartButton_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }       
 
-        #region
-        /// <summary>
-        /// MouseEnter/MouseLeave effects for buttons
-        /// </summary>
+        // ##############################
+        // Main.cs button hover and navbar focus
+        // ##############################
 
         private bool homeFocused;
         private bool statusFocused;
@@ -376,6 +414,13 @@ namespace PC_Anti_Virus_Shield_Pro_2010
             
         }
 
-        #endregion
+        private void restartButton_MouseEnter(object sender, EventArgs e)
+        {
+            restartButton.BackgroundImage = Properties.Resources.Taskbar3;
+        }
+        private void restartButton_MouseLeave(object sender, EventArgs e)
+        {
+            restartButton.BackgroundImage = Properties.Resources.Taskbar2;
+        }             
     }
 }

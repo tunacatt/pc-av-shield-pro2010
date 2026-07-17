@@ -47,7 +47,10 @@ namespace PC_Anti_Virus_Shield_Pro_2010
                 header.Location = new Point(110, 0);
                 thankText.Visible = true;
                 activationBox.Visible = false;
-                mainForm.CloseActivationPopup();
+                pictureBox1.Image = Properties.Resources.PCAVShield10;
+                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+                mainForm.ShowUpdateControls(true);
+                // mainForm.CloseActivationPopup();
             }
             else
             {

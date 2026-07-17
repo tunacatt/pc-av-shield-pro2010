@@ -31,19 +31,21 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.Navbar = new System.Windows.Forms.Panel();
-            this.separator = new System.Windows.Forms.Panel();
-            this.Content = new System.Windows.Forms.Panel();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.separator = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Home = new System.Windows.Forms.Button();
+            this.Content = new System.Windows.Forms.Panel();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.Title = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.TitleText = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.restartButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.Navbar.SuspendLayout();
             this.Title.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -63,27 +65,6 @@
             this.Navbar.Name = "Navbar";
             this.Navbar.Size = new System.Drawing.Size(200, 493);
             this.Navbar.TabIndex = 3;
-            // 
-            // separator
-            // 
-            this.separator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.separator.Location = new System.Drawing.Point(18, 237);
-            this.separator.Name = "separator";
-            this.separator.Size = new System.Drawing.Size(172, 2);
-            this.separator.TabIndex = 5;
-            // 
-            // Content
-            // 
-            this.Content.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Content.Location = new System.Drawing.Point(200, 114);
-            this.Content.Name = "Content";
-            this.Content.Size = new System.Drawing.Size(575, 492);
-            this.Content.TabIndex = 4;
-            // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
             // 
             // button5
             // 
@@ -142,6 +123,14 @@
             this.button3.MouseEnter += new System.EventHandler(this.Help_Enter);
             this.button3.MouseLeave += new System.EventHandler(this.Help_Leave);
             // 
+            // separator
+            // 
+            this.separator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.separator.Location = new System.Drawing.Point(18, 237);
+            this.separator.Name = "separator";
+            this.separator.Size = new System.Drawing.Size(172, 2);
+            this.separator.TabIndex = 5;
+            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Transparent;
@@ -199,10 +188,25 @@
             this.Home.MouseEnter += new System.EventHandler(this.Home_Enter);
             this.Home.MouseLeave += new System.EventHandler(this.Home_Leave);
             // 
+            // Content
+            // 
+            this.Content.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Content.Location = new System.Drawing.Point(200, 114);
+            this.Content.Name = "Content";
+            this.Content.Size = new System.Drawing.Size(575, 492);
+            this.Content.TabIndex = 4;
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
             // Title
             // 
             this.Title.BackgroundImage = global::PC_Anti_Virus_Shield_Pro_2010.Properties.Resources.wp13865972;
             this.Title.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Title.Controls.Add(this.label1);
+            this.Title.Controls.Add(this.restartButton);
             this.Title.Controls.Add(this.pictureBox1);
             this.Title.Controls.Add(this.MainPanel);
             this.Title.Controls.Add(this.TitleText);
@@ -210,6 +214,16 @@
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(776, 117);
             this.Title.TabIndex = 2;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::PC_Anti_Virus_Shield_Pro_2010.Properties.Resources.PCAVShield10;
+            this.pictureBox1.Location = new System.Drawing.Point(29, 25);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(69, 74);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
             // MainPanel
             // 
@@ -229,15 +243,31 @@
             this.TitleText.TabIndex = 0;
             this.TitleText.Text = "PC Anti Virus Shield Pro 2010";
             // 
-            // pictureBox1
+            // restartButton
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::PC_Anti_Virus_Shield_Pro_2010.Properties.Resources.PCAVShield10;
-            this.pictureBox1.Location = new System.Drawing.Point(29, 25);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(69, 74);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.restartButton.BackColor = System.Drawing.Color.Transparent;
+            this.restartButton.BackgroundImage = global::PC_Anti_Virus_Shield_Pro_2010.Properties.Resources.Taskbar2;
+            this.restartButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.restartButton.FlatAppearance.BorderSize = 0;
+            this.restartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.restartButton.Location = new System.Drawing.Point(685, 22);
+            this.restartButton.Name = "restartButton";
+            this.restartButton.Size = new System.Drawing.Size(75, 23);
+            this.restartButton.TabIndex = 6;
+            this.restartButton.Text = "Restart";
+            this.restartButton.UseVisualStyleBackColor = false;
+            this.restartButton.Click += new System.EventHandler(this.restartButton_Click);
+            this.restartButton.MouseEnter += new System.EventHandler(this.restartButton_MouseEnter);
+            this.restartButton.MouseLeave += new System.EventHandler(this.restartButton_MouseLeave);
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(448, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(312, 15);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "An update is ready. Please restart the app with the button below.";
             // 
             // Main
             // 
@@ -278,6 +308,8 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip trayMenu;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button restartButton;
+        private System.Windows.Forms.Label label1;
     }
 }
 
